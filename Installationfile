@@ -1,0 +1,34 @@
+The deb package is nowhere to be found using apt for kali linux.
+The workaround is as follows.
+
+```
+# First update the repo
+sudo apt update
+# Install Snapd
+sudo apt install snapd
+# Do not forget to enable snapd and apparmor
+sudo systemctl enable --now snapd apparmor
+# Once its enabled install lxd package
+sudo snap install lxd
+# Logout and log back in to your account.
+# I know. I know. That part kinda sucks. 
+# The following steps sucks even more
+# For whatever reason, the snap location is not getting
+# added to the env variable. Add all the necessary manually
+# First check whether snap is added to the path.
+# The path should be /snap/bin
+sudo env | grep PATH
+# If not added, you will have to add the paths manually.
+export PATH=$PATH:/snap/bin 
+# That one just above is just a temporary solution. 
+# You have two options. Either add the export path in the 
+# /etc/bash.bashrc file or do the following. Both are ugly way
+# to do it.
+echo 'alias lxd="sudo /snap/bin/lxd"' >> ~/.bash_aliases
+echo 'alias lxc="sudo /snap/bin/lxc"' >> ~/.bash_aliases
+source ~/.bash_aliases
+# Don't forget to add sudo infront of the aliases for lxc and lxd
+# You will understand what I mean when your ignorant ass doesn't 
+# add it and tries to call sudo on it.
+```
+This should be enough to install lxd and lxc
