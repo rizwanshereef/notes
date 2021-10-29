@@ -1,0 +1,33 @@
+## LXC/LXD Deep Dive
+
+Self contained execution environment with their own isolated cpu, memory, block IO, and network resources.
+They share the kernel makes very efficient.
+
+LXC is a linux only hypervisor
+
+LXC : Linux Container
+LXD : Linux Container Daemon
+
+Docker provides application containers -- self contained application
+LXC contains machine containers -- More like VM
+
+LXD : Focuses on a self-contained OS userspace created with its isolated infrastructure. LXC is the userspace interface for the linux kernel containment features and manages the kernel namespaces,Apparmor and SELinux Profiles, chroots and all ther kernel relate fucntionality.
+
+LXC relies more on the OS features for networking and storage than docker does.
+
+LXD is the container's "hypervisor" consisting of the daemon, lxd, the client, lxc and the possibly the nova-lxd OpenStack Plugin if you want or need it.
+
+Docker engine wraps applicatios with a self contained filesystem instead of a base userspace image like so that we can treat the whole container are as single process in the docker engine.
+
+docker is designed to be stateless and have version tracking features and there are lot of features.
+
+lxc is api driven
+
+lxd is fast, efficient and secure
+
+lxd and docker can run side by side
+also docker can run inside lxd
+
+possible to run lxc inside another lxc
+
+lxc responds to restful api.
