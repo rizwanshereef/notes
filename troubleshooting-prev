@@ -1,0 +1,22 @@
+List and remove unused bridges
+
+```
+$ sudo lxc network list 
+$ sudo lxc network delete <bridgename> 
+```
+
+Before removing it, make sure it is not being used by any working container.
+Print the logs
+
+```
+$ sudo lxc info --show-log local:a1 
+```
+
+This is crucial to find whats going wrong with a container. If you omit the --show-log and local:a1 part, it will just print out all the containers info. --show-logs alone prints all sorts of things. Its best describe which container's log we are referring to.The keyword local indicated that the container is on the local machine and the a1 here was my container name.
+
+Error : Missing Parent 'lxdbr0' for nic 'eth0'
+
+The solution to this would be reconfigure the lxd conf initialized using lxd init command.
+```
+$ sudo dpkg-reconfigure -p medium lxd
+```
